@@ -11,11 +11,11 @@ namespace ConsoleApp1.Models
         public override int SaveChanges()
         {
             var entries = ChangeTracker.Entries();
-            foreach (var entry in entries)
+            foreach (var entry in entries.Where(e => e.Entity is Course))
             {
-                if (entry.Entity is Course && entry.State == EntityState.Modified)
+                if (entry.State == EntityState.Modified)
                 {
-                    entry.CurrentValues.SetValues(new { ModifiedOn = DateTime.Now });
+                    entry.CurrentValues.SetValues(new { ModifiedOn = DateTime.Now, Credits = 12 });
                 }
             }
             return base.SaveChanges();

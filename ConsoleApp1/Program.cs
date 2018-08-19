@@ -21,17 +21,20 @@ namespace ConsoleApp1
                 //db.Configuration.LazyLoadingEnabled = false;
                 //db.Configuration.ProxyCreationEnabled = false;
 
-                var dept = db.Department.Include(p => p.Course);
+                //var dept = db.Department.Include(p => p.Course);
 
-                foreach (var d in dept)
-                {
-                    Console.WriteLine(d.Name);
-                    foreach (var c in d.Course)
-                    {
-                        Console.WriteLine(c.Title);
-                    }
-                }
-
+                //foreach (var d in dept)
+                //{
+                //    Console.WriteLine(d.Name);
+                //    foreach (var c in d.Course)
+                //    {
+                //        Console.WriteLine(c.Title);
+                //    }
+                //}
+                var dep = db.Department.Find(31);
+                Console.ReadLine();
+                dep.Name = "abc" + DateTime.Now;
+                db.SaveChanges();
                 //QueryCourse(db);
 
                 //InsertDepartment(db);
