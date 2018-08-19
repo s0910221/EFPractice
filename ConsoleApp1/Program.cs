@@ -32,11 +32,17 @@ namespace ConsoleApp1
                 //    }
                 //}
 
-                var a = db.Department;
-                Console.WriteLine(a.ToList());
-
-                var b = db.GetDepartment();
-                Console.WriteLine(b.ToList());
+                var c = new Course()
+                {
+                    DepartmentID = 1,
+                    Title = "aaa",
+                    Credits = CoureseCredit.Best
+                };
+                db.Course.Add(c);
+                db.SaveChanges();
+                var s = db.Course.Find(11).Credits;
+                Console.WriteLine(c.Credits);
+                Console.WriteLine(s);
 
                 //QueryCourse(db);
 
