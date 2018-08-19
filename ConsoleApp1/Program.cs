@@ -31,10 +31,13 @@ namespace ConsoleApp1
                 //        Console.WriteLine(c.Title);
                 //    }
                 //}
-                var dep = db.Department.Find(31);
-                Console.ReadLine();
-                dep.Name = "abc" + DateTime.Now;
-                db.SaveChanges();
+
+                var a = db.Department;
+                Console.WriteLine(a.ToList());
+
+                var b = db.GetDepartment();
+                Console.WriteLine(b.ToList());
+
                 //QueryCourse(db);
 
                 //InsertDepartment(db);

@@ -173,6 +173,7 @@
           <Parameter Name="InstructorID" Type="int" Mode="In" />
           <Parameter Name="RowVersion_Original" Type="timestamp" Mode="In" />
         </Function>
+        <Function Name="GetDepartment" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="ContosoUniversityModelStoreContainer">
           <EntitySet Name="Course" EntityType="Self.Course" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CourseInstructor" EntityType="Self.CourseInstructor" Schema="dbo" store:Type="Tables" />
@@ -391,6 +392,7 @@
             <Parameter Name="InstructorID" Mode="In" Type="Int32" />
             <Parameter Name="RowVersion_Original" Mode="In" Type="Binary" />
           </FunctionImport>
+          <FunctionImport Name="GetDepartment" EntitySet="Department" ReturnType="Collection(ContosoUniversityModel.Department)" />
         </EntityContainer>
         <ComplexType Name="Department_Insert_Result">
           <Property Type="Int32" Name="DepartmentID" Nullable="false" />
@@ -423,6 +425,28 @@
                 <ScalarProperty Name="InstructorID" ColumnName="InstructorID" />
                 <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
               </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="ContosoUniversityModel.Department">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="ContosoUniversityModel.Store.Department_Insert">
+                  <ScalarProperty Name="InstructorID" ParameterName="InstructorID" />
+                  <ScalarProperty Name="StartDate" ParameterName="StartDate" />
+                  <ScalarProperty Name="Budget" ParameterName="Budget" />
+                  <ScalarProperty Name="Name" ParameterName="Name" />
+                </InsertFunction>
+                <UpdateFunction FunctionName="ContosoUniversityModel.Store.Department_Update">
+                  <ScalarProperty Name="RowVersion" ParameterName="RowVersion_Original" Version="Current" />
+                  <ScalarProperty Name="InstructorID" ParameterName="InstructorID" Version="Current" />
+                  <ScalarProperty Name="StartDate" ParameterName="StartDate" Version="Current" />
+                  <ScalarProperty Name="Budget" ParameterName="Budget" Version="Current" />
+                  <ScalarProperty Name="Name" ParameterName="Name" Version="Current" />
+                  <ScalarProperty Name="DepartmentID" ParameterName="DepartmentID" Version="Current" />
+                </UpdateFunction>
+                <DeleteFunction FunctionName="ContosoUniversityModel.Store.Department_Delete">
+                  <ScalarProperty Name="RowVersion" ParameterName="RowVersion_Original" />
+                  <ScalarProperty Name="DepartmentID" ParameterName="DepartmentID" />
+                </DeleteFunction>
+              </ModificationFunctionMapping>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Enrollment">
@@ -473,6 +497,8 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="Department_Update" FunctionName="ContosoUniversityModel.Store.Department_Update" />
+          <FunctionImportMapping FunctionImportName="GetDepartment" FunctionName="ContosoUniversityModel.Store.GetDepartment">
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
