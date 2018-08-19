@@ -32,17 +32,12 @@ namespace ConsoleApp1
                 //    }
                 //}
 
-                var c = new Course()
+                var data = db.Database.SqlQuery<CourseSqlModel>("select CourseID, Title, Credits from Course where CourseID > @p0", 2);
+
+                foreach (var item in data)
                 {
-                    DepartmentID = 1,
-                    Title = "aaa",
-                    Credits = CoureseCredit.Best
-                };
-                db.Course.Add(c);
-                db.SaveChanges();
-                var s = db.Course.Find(11).Credits;
-                Console.WriteLine(c.Credits);
-                Console.WriteLine(s);
+                    Console.WriteLine(item.Title);
+                }
 
                 //QueryCourse(db);
 
