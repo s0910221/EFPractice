@@ -90,6 +90,7 @@
     <None Include="Models\ContosoUniversity.edmx.diagram">
       <DependentUpon>ContosoUniversity.edmx</DependentUpon>
     </None>
+    <Compile Include="Models\ContosoUniversityEntities.partial.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Models\ContosoUniversity.Context.tt">
